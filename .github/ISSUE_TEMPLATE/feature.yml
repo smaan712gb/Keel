@@ -1,0 +1,40 @@
+name: Feature request
+description: Suggest a capability Keel should grow into.
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Keel's scope is deliberately narrow: a neutral coordination primitive
+        for AI coding agents. Before filing, please check whether the idea is
+        already on the M2 list in the README — if it is, an upvote comment on
+        an existing issue is more useful than a duplicate.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem are you trying to solve?
+      placeholder: Describe the multi-agent or coordination pain, not a specific implementation.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behaviour
+      description: What would Keel do? How would agents / users interact with it?
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: Scope check
+      options:
+        - label: This is coordination / locking / planning, not sandboxing, observability, or agent logic.
+        - label: This does not couple Keel to a specific agent (Claude, Cursor, Codex, etc.).

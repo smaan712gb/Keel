@@ -1,0 +1,74 @@
+name: Bug report
+description: Something in Keel is broken or behaving unexpectedly.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to file a bug. Please include enough
+        information for someone else to reproduce the problem.
+
+  - type: input
+    id: version
+    attributes:
+      label: Keel version
+      description: Output of `keel version`
+      placeholder: "keel 0.1.0"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating system
+      options:
+        - Linux
+        - macOS
+        - Windows
+        - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: agent
+    attributes:
+      label: Which agent(s) exposed the bug?
+      multiple: true
+      options:
+        - Claude Code
+        - Cursor
+        - Codex / Windsurf / OpenClaw / Paperclip (other MCP client)
+        - CLI only
+        - Not agent-specific
+
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. `keel init`
+        2. `keel acquire ...`
+        3. observe X
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behaviour
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behaviour
+      description: Include stderr / exit codes / JSON output where relevant.
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs or MCP tool call traces
+      render: text

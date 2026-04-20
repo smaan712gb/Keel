@@ -1,0 +1,17 @@
+# Go build outputs
+/keel
+/keel.exe
+/bin/
+
+# Generated demo artefact (rendered by `vhs examples/demo/keel.tape`)
+/examples/demo/keel.gif
+
+# Editor & OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+
+# Keel local state (should never be committed)
+.keel/

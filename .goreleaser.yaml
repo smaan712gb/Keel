@@ -1,0 +1,71 @@
+# GoReleaser config for Keel.
+# Pure-Go build (modernc.org/sqlite), so CGO is off and cross-compilation is trivial.
+version: 2
+
+before:
+  hooks:
+    - go mod tidy
+
+builds:
+  - id: keel
+    main: ./cmd/keel
+    binary: keel
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - darwin
+      - windows
+    goarch:
+      - amd64
+      - arm64
+    ldflags:
+      - -s -w -X github.com/smaan712gb/keel/internal/mcp.Version={{.Version}}
+
+archives:
+  - id: keel
+    name_template: "keel_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+    format_overrides:
+      - goos: windows
+        format: zip
+    files:
+      - README.md
+      - LICENSE
+      - CHANGELOG.md
+
+checksum:
+  name_template: "checksums.txt"
+
+snapshot:
+  version_template: "{{ incpatch .Version }}-next"
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - "^docs:"
+      - "^test:"
+      - "^chore:"
+      - "^ci:"
+      - "Merge pull request"
+      - "Merge branch"
+
+release:
+  github:
+    owner: smaan712gb
+    name: keel
+  draft: false
+  prerelease: auto
+  header: |
+    ## Keel {{ .Tag }}
+
+    Single-binary MCP server that coordinates AI coding agents on the same repo.
+
+    ### Install
+
+        curl -fsSL https://raw.githubusercontent.com/smaan712gb/keel/main/install.sh | bash
+
+    Or download the archive for your platform below.
+  footer: |
+    ---
+    Full changelog: https://github.com/smaan712gb/keel/blob/main/CHANGELOG.md
